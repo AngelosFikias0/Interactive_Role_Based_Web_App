@@ -64,6 +64,20 @@ if (isset($_POST['update'])) {
     }
 }
 
+// Handle account deletion
+if (isset($_POST['delete'])) {
+    $sql_delete = "DELETE FROM `users` WHERE `name` = '$username'";
+    if (mysqli_query($conn, $sql_delete)) {
+        // Destroy the session and redirect to login
+        session_destroy();
+        header('Location: Login.php');
+        exit();
+    } else {
+        $message = "Error deleting account: " . mysqli_error($conn);
+        $messageClass = 'error';
+    }
+}
+
 mysqli_close($conn);
 ?>
 
@@ -142,8 +156,15 @@ mysqli_close($conn);
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
-        .Dash{
-            text-align:center;
+        input[type="submit"].delete {
+            background-color: red;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"].delete:hover {
+            background-color: darkred;
+        }
+        .Dash {
+            text-align: center;
         }
         a {
             display: inline-block;
@@ -163,51 +184,43 @@ mysqli_close($conn);
         }
 
         @media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 24px;
-        padding: 15px;
-    }
-
-    .message {
-        max-width: 100%;
-        margin: 10px auto;
-        padding: 10px;
-    }
-
-    form {
-        max-width: 100%;
-        padding: 15px;
-    }
-
-    label {
-        font-size: 14px;
-    }
-
-    input[type="text"] {
-        width: calc(100% - 20px);
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    input[type="submit"] {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    .Dash {
-        font-size: 16px;
-    }
-
-    a {
-        font-size: 16px;
-        padding: 10px 15px;
-    }
-}
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+                padding: 15px;
+            }
+            .message {
+                max-width: 100%;
+                margin: 10px auto;
+                padding: 10px;
+            }
+            form {
+                max-width: 100%;
+                padding: 15px;
+            }
+            label {
+                font-size: 14px;
+            }
+            input[type="text"] {
+                width: calc(100% - 20px);
+                padding: 8px;
+                font-size: 14px;
+            }
+            input[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+            }
+            .Dash {
+                font-size: 16px;
+            }
+            a {
+                font-size: 16px;
+                padding: 10px 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -223,6 +236,10 @@ mysqli_close($conn);
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" value="<?php echo htmlspecialchars($userData['name']); ?>" required>
         <input type="submit" name="update" value="Update Profile">
+    </form>
+
+    <form action="" method="post" style="text-align: center; margin-top: 20px;">
+        <input type="submit" name="delete" value="Delete Account" class="delete">
     </form>
 
     <p class="Dash"><a href="Dashboard.php">Go back to Dashboard</a></p>
