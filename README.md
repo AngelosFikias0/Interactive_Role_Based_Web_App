@@ -1,4 +1,4 @@
-Web Application with User and Admin Dashboard
+Blog Web Application with User and Admin Dashboard
 =============================================
 
 Overview
