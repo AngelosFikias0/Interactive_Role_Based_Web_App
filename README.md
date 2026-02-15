@@ -1,137 +1,115 @@
-Blog Web Application with User and Admin Dashboard
-=============================================
+# 📝 Blog Web Application
 
-Overview
---------
+> **A full-stack PHP blogging platform featuring dual-layered dashboards, secure authentication, and Role-Based Access Control (RBAC).**
 
-Welcome to my web application featuring intuitive dashboards for both users and administrators. Users can create and manage posts and update their profiles, while administrators can handle user management tasks, such as creating and deleting accounts. This project highlights fundamental CRUD operations, user authentication, and role-based access control as well as front-end and back-end development.
+This project demonstrates a complete implementation of the **MVC (Model-View-Controller)** logic using native PHP. It provides a structured environment for users to share content and for administrators to maintain platform integrity through a dedicated management suite.
 
-Features
---------
+---
 
-*   **User Registration and Login:** Users can create accounts and log in. Administrators can also log in to access the admin dashboard.
-    
-*   **User Dashboard:** Users can create posts, view their own posts, and see a comprehensive list of all posts.
-    
-*   **Admin Dashboard:** Administrators can view a list of all users and have the ability to delete users.
-    
-*   **Profile Management:** Users can easily update their profile username.
-    
+## 📌 System Architecture & Logic
 
-Installation
-------------
+The application utilizes a centralized MySQL database to manage three core entities: **Users, Admins, and Posts**.
 
-### Prerequisites
 
-*   PHP 7.4 or later
-    
-*   MySQL 5.7 or later
-    
-*   Web server (e.g., Apache)
-    
 
-### Setup
+```text
+       [ Web Browser (Client) ]
+                 |
+        /--------+--------\
+        |                 |
+ [ User Portal ]   [ Admin Portal ]
+ (Login/Register)   (Secure Login)
+        |                 |
+        v                 v
+ [ Dashboard ]     [ User Management ]
+ (CRUD Posts)      (Audit/Delete)
+        |                 |
+        \--------+--------/
+                 |
+        [ PHP Backend Engine ]
+                 |
+        [ MySQL Database (wapp) ]
+```
 
-1.  Clone the repository:git clone https://github.com/AngelosFikias0/Web_Application.git
-    
-2.  Navigate to the project directory:cd your-repository
-    
-3.  Create the Database:
-    
-    *   Set up a database named wapp(short for web app) in MySQL.
-        
-4.  Set Up the Database:
-    
-    *   Import the provided SQL schema to create the necessary tables. This includes users, admins, and posts tables with the correct schema.
-        
-5.  Configure Database Connection:
-    
-    *   Update the database connection parameters in the PHP files to match your setup (e.g., localhost, root, password, wapp).
-        
-6.  Restart your web server:
-    
-    *   If using Apache, ensure that mod\_rewrite is enabled. Restart Apache with sudo service apache2 restart.
-        
+---
 
-Usage
------
+## 🚀 Key Features
 
-1.  Access the Application:
-    
-    *   Open your browser and go to http://localhost/your-repository/Login.php.
-        
-2.  User Registration:
-    
-    *   Use the registration form to create a new user account.
-        
-3.  User Login:
-    
-    *   Log in with your username and password.
-        
-4.  User Dashboard:
-    
-    *   Create and manage posts, and view a list of existing posts.
-        
-5.  Admin Dashboard:
-    
-    *   Log in with admin credentials to manage user accounts.
-        
-6.  Profile Management:
-    
-    *   Update your username from the profile page.
-        
+### 🔐 Authentication & Roles
+* **Dual-Entry System:** Separate authentication logic for standard users and administrative staff.
+* **RBAC (Role-Based Access Control):** Session-based security ensuring users cannot access admin tools and vice-versa.
 
-Technologies Used
------------------
+### 👤 User Capabilities
+* **Content Creation:** Full CRUD (Create, Read, Update, Delete) functionality for personal blog posts.
+* **Global Feed:** A comprehensive view of all community posts.
+* **Profile Customization:** Dynamic username updates and account settings.
 
-*   **Frontend:** HTML, CSS
-    
-*   **Backend:** PHP
-    
-*   **Database:** MySQL
-    
-*   **Server:** Apache
-    
+### 🛠 Administrative Tools
+* **User Auditing:** A high-level overview of the entire user base.
+* **Account Moderation:** Ability to remove user accounts to maintain community standards.
 
-Skills Showcase
----------------
+---
 
-*   **Web Development:** Demonstrated ability in both front-end and back-end web development.
-    
-*   **Database Management:** Experience in setting up and managing MySQL databases.
-    
-*   **Role-Based Access Control:** Implemented user and admin roles with effective access controls.
-    
-*   **CRUD Operations:** Proficient in implementing Create, Read, Update, and Delete functionalities.
-    
+## 🧰 Technical Stack
 
-Contributing
-------------
+| Category | Technology |
+| :--- | :--- |
+| **Frontend** | HTML5, CSS3 |
+| **Backend** | PHP 7.4+ |
+| **Database** | MySQL 5.7+ |
+| **Web Server** | Apache (mod_rewrite enabled) |
 
-1.  Fork the Repository:
-    
-    *   Click the "Fork" button at the top-right corner of the repository page on GitHub.
-        
-2.  Create a Branch:
-    
-    *   git checkout -b feature/YourFeature
-        
-3.  Make Changes:
-    
-    *   Commit your changes with a descriptive message: git commit -am 'Add new feature'
-        
-4.  Push to Your Branch:
-    
-    *   git push origin feature/YourFeature
-        
-5.  Create a Pull Request:
-    
-    *   Open a pull request from your branch to the main branch of the original repository.
-        
+---
 
-License
--------
+## 🛠 Installation & Setup
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+### 1️⃣ Environment Prep
+Ensure you have a local server environment installed (XAMPP, WAMP, or MAMP).
 
-Feel free to adjust the content to better fit your project's specifics!
+### 2️⃣ Clone & Navigate
+```bash
+git clone [https://github.com/AngelosFikias0/Web_Application.git](https://github.com/AngelosFikias0/Web_Application.git)
+cd Web_Application
+```
+
+### 3️⃣ Database Configuration
+1.  Open **phpMyAdmin** and create a database named `wapp`.
+2.  Import the provided SQL schema file located in the `/database` folder.
+3.  Open the database configuration file (e.g., `db_connect.php`) and update your credentials:
+    ```php
+    $host = "localhost";
+    $user = "root";
+    $pass = "your_password";
+    $db   = "wapp";
+    ```
+
+### 4️⃣ Server Startup
+If using Apache, ensure `mod_rewrite` is active and restart the service:
+```bash
+sudo service apache2 restart
+```
+
+---
+
+## 📖 Usage Guide
+
+1.  **Access:** Navigate to `http://localhost/Web_Application/Login.php`.
+2.  **Register:** Create a new account to access the **User Dashboard**.
+3.  **Post:** Write your first blog entry and view it on the public feed.
+4.  **Admin:** Use designated admin credentials to log in and manage the user registry.
+
+---
+
+## 📈 Engineering Highlights
+
+* **Security:** Implemented session validation to prevent unauthorized URL access.
+* **Data Integrity:** Used relational database design to link posts to specific user IDs.
+* **Scalability:** Modular PHP structure allows for easy addition of new features like "Comments" or "Categories."
+
+---
+
+## 📄 License
+This project is licensed under the **MIT License**.
+
+---
+**Developed by Angelos Fikias** *Showcasing proficiency in Full-Stack Development and Secure System Design.*
