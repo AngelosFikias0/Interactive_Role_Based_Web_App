@@ -1,4 +1,4 @@
-# 📝 Blog Web Application
+# Blog Web Application
 
 > **A full-stack PHP blogging platform featuring dual-layered dashboards, secure authentication, and Role-Based Access Control (RBAC).**
 
